@@ -175,9 +175,13 @@ class MazeTemplate {
         // only set the rendering depth very deep (=15000( if we fly over the maze,
         // otherwise the walk through the maze will be unnecessarily deep calculated.
 
-        if (this.flyheight != 0)
+        if (this.flyheight != 0) {
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.3, 15000);
 
+            // look north east over the map
+            let lookAtPoint = new THREE.Vector3(this.cellSize*2, 0, this.cellSize*2);
+            camera.lookAt(lookAtPoint);
+        }
 
         renderer = new THREE.WebGLRenderer({antialias: true});
         renderer.setSize(window.innerWidth, window.innerHeight);
